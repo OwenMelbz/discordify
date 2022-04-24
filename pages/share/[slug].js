@@ -12,7 +12,7 @@ export default function Share({ name, url, mime }) {
             <meta property="og:site_name" content="Discordify" />
             <meta property="og:url" content={ url } />
             <meta property="og:description" content="Self-host your large Discord videos to avoid paying for Nitro and share with friends!" />
-            <meta property="og:type" content="video" />
+            <meta property="og:type" content="video.other" />
             <meta property="og:video:width" content="1280" />
             <meta property="og:video:height" content="720" />
             <meta property="og:video:type" content={`video/${mime}`} />
