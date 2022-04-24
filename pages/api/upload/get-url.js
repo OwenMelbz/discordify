@@ -7,12 +7,16 @@ export default function handler(req, res) {
     const extension = name.split('.').pop()
     const fileName = `${uuid}.${extension || 'mp4'}`
 
-    const s3 = new aws.S3({
+    const credentials = {
         accessKeyId: process.env.AWS_S3_ACCESS_KEY_ID,
         secretAccessKey: process.env.AWS_S3_SECRET_ACCESS_KEY,
         region: process.env.AWS_S3_REGION,
         signatureVersion: 'v4',
-    });
+    }
+
+    console.log(credentials)
+
+    const s3 = new aws.S3(credentials);
 
     const signingParams = {
         Bucket: process.env.AWS_S3_BUCKET,
@@ -21,6 +25,8 @@ export default function handler(req, res) {
         ContentType: type,
         ACL: 'public-read',
     };
+
+    console.log(signingParams)
 
     s3.getSignedUrl('putObject', signingParams, (err, data) => {
         if (err) {
