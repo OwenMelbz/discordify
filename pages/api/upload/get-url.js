@@ -14,7 +14,7 @@ export default function handler(req, res) {
         signatureVersion: 'v4',
     }
 
-    console.log(credentials)
+    // console.log(credentials)
 
     const s3 = new aws.S3(credentials);
 
@@ -26,7 +26,7 @@ export default function handler(req, res) {
         ACL: 'public-read',
     };
 
-    console.log(signingParams)
+    // console.log(signingParams)
 
     s3.getSignedUrl('putObject', signingParams, (err, data) => {
         if (err) {
