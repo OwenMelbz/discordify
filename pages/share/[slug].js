@@ -1,7 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React from 'react'
 import Head from 'next/head'
+import Link from 'next/link'
 
-export default function Share({ name, url }) {
+export default function Share({ name, url, mime }) {
     return <>
         <Head>
             <title>{name} - Discordify</title>
@@ -14,17 +15,21 @@ export default function Share({ name, url }) {
             <meta property="og:type" content="video" />
             <meta property="og:video:width" content="1280" />
             <meta property="og:video:height" content="720" />
-            <meta property="og:video:type" content="application/mp4" />
+            <meta property="og:video:type" content={`video/${mime}`} />
             <meta property="og:video" content={ url } />
         </Head>
 
         <div className="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
             <div className="sm:mx-auto sm:w-full sm:max-w-md">
-                <img
-                    className="mx-auto h-12 w-auto"
-                    src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
-                    alt="Workflow"
-                />
+                <Link href="/">
+                    <a>
+                        <img
+                            className="mx-auto h-12 w-auto"
+                            src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
+                            alt="Workflow"
+                        />
+                    </a>
+                </Link>
                 <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
                     Discordify Video
                 </h2>
@@ -87,11 +92,13 @@ export default function Share({ name, url }) {
 export const getServerSideProps = context => {
     const name = context.params.slug
     const url = `https://${process.env.AWS_S3_BUCKET}.s3.${process.env.AWS_S3_REGION}.amazonaws.com/${name}`
+    const mime = url.split('.').pop()
 
     return {
         props: {
             name,
             url,
+            mime,
         },
     }
 }

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
+import Link from 'next/link'
 
 export default function Home() {
     const [file, setFile] = useState(null)
@@ -25,11 +26,15 @@ export default function Home() {
 
             <div className="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
                 <div className="sm:mx-auto sm:w-full sm:max-w-md">
-                    <img
-                        className="mx-auto h-12 w-auto"
-                        src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
-                        alt="Workflow"
-                    />
+                    <Link href="/">
+                        <a>
+                            <img
+                                className="mx-auto h-12 w-auto"
+                                src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
+                                alt="Workflow"
+                            />
+                        </a>
+                    </Link>
                     <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
                         Discordify Video
                     </h2>
