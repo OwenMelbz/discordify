@@ -190,8 +190,6 @@ const Uploader = ({ onSuccess, file }) => {
             url,
             name,
         })
-
-        setBusy(false)
     }
 
     const getUploadUrl = async () => {

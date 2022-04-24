@@ -61,7 +61,7 @@ export default function Share({ name, url, mime }) {
                                 id="url"
                                 readOnly
                                 className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                                value={ typeof window != 'undefined' ? window?.location?.href : 'Loading...' }
+                                value={ typeof window != 'undefined' ? window?.location?.href : `https://discordify.xyz/share/${name}` }
                             />
                         </div>
                     </div>
