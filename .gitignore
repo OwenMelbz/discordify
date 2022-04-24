@@ -45,5 +45,5 @@ public/robots.txt
 services/stampedRequestQueue/stamped_reviews.json
 header.json
 
-yarn.lock
+package-lock.json
 yarn-error.log
