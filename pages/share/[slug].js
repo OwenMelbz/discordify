@@ -91,7 +91,7 @@ export default function Share({ name, url, mime }) {
 
 export const getServerSideProps = context => {
     const name = context.params.slug
-    const url = `https://${process.env.AWS_S3_BUCKET}.s3.${process.env.AWS_S3_REGION}.amazonaws.com/${name}`
+    const url = `https://s3.discordify.xyz/${name}`
     const mime = url.split('.').pop()
 
     return {

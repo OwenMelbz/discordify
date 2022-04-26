@@ -212,7 +212,45 @@ const Uploader = ({ onSuccess, file }) => {
             type="submit"
             className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
         >
-            { busy ? 'Uploading...' : 'Upload' }
+            <AnimatedDots
+                busy={ busy }
+                busyValue="Uploading"
+                defaultValue="Upload"
+            />
         </button>
     </div> : null
+}
+
+const AnimatedDots = ({ busy, defaultValue = '', busyValue = 'Processing' }) => {
+    const timer = useRef(null)
+    const [dotCount, setDotCount] = useState(0)
+    const dots = new Array(dotCount || 0).fill('.').join('')
+
+    useEffect(() => {
+        if (!busy) {
+            clearInterval(timer.current)
+            setDotCount(0)
+        } else {
+            timer.current = setInterval(() => {
+                setDotCount(previousDots => {
+                    if (previousDots >= 3) {
+                        return 0
+                    } else {
+                        return previousDots + 1
+                    }
+                })
+            }, 500)
+        }
+    }, [busy])
+
+    useEffect(() => {
+        return () => {
+            clearInterval(timer.current)
+            setDotCount(0)
+        }
+    }, [])
+
+    return <span className="relative">
+        { busy ? busyValue : defaultValue }<span className="absolute">{ dots }</span>
+    </span>
 }
